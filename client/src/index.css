@@ -1,0 +1,98 @@
+:root {
+  --mainColor: #636ae8ff;
+  --mainColorHover: #4850e4ff;
+  --mainColorHoverActive: #2c35e0ff;
+  --textColor: #9095a0ff;
+  --darkColor: #1d2128ff;
+}
+
+.chakra-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-button {
+  transition-duration: 300ms;
+  background-color: var(--mainColor);
+  &:hover {
+    background-color: var(--mainColorHover);
+  }
+  &:hover:active {
+    background-color: var(--mainColorHoverActive);
+  }
+}
+
+.main-outline-button {
+  transition-duration: 300ms;
+  border-color: var(--mainColor);
+  color: var(--mainColor);
+  &:hover {
+    border-color: var(--mainColorHover);
+    color: var(--mainColorHover);
+  }
+  &:hover:active {
+    border-color: var(--mainColorHoverActive);
+    color: var(--mainColorHoverActive);
+  }
+}
+
+.main-link {
+  transition-duration: 300ms;
+  color: var(--mainColor);
+  &:hover {
+    color: var(--mainColorHover);
+  }
+  &:hover:active {
+    color: var(--mainColorHoverActive);
+  }
+}
+
+input,
+select,
+textarea {
+  outline: none;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+.auth-form {
+  max-width: 650px;
+  width: 100%;
+}
+
+.header-links-list li a {
+  position: relative;
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: none;
+  transition-duration: 300ms;
+}
+
+.header-links-list li a:hover {
+  color: var(--mainColor);
+}
+
+.header-links-list li a::before {
+  position: absolute;
+  transition-duration: 300ms;
+  content: "";
+  width: 0%;
+  height: 3px;
+  left: 0;
+  bottom: 0 !important;
+  background-color: var(--mainColor);
+}
+
+.header-links-list li a:hover::before {
+  width: 100%;
+}
+
+.vendor-heading {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
