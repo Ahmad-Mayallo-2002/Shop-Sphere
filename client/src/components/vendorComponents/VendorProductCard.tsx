@@ -32,6 +32,7 @@ export default function VendorProductCard({
               Edit Product
             </Button>
           }
+          id={_id}
         />
         <Button colorPalette="red" size="sm" w="full">
           Delete Product

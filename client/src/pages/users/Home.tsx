@@ -5,20 +5,9 @@ import { Button, Center, Heading, Text, VStack } from "@chakra-ui/react";
 export default function Home() {
   return (
     <>
-      <Center
-        as="section"
-        id="hero"
-        bgColor="rgb(0, 0, 0, .65)"
-        bgBlendMode="darken"
-        bgSize="cover"
-        bgPos="center"
-        h="500px"
-        bgImage={`url("./hero.jpg")`}
-      >
+      <Center className="hero-section" as="section" id="hero">
         <VStack gap={7} color="#fff">
-          <Heading as="h2" fontSize="5xl" fontWeight={700}>
-            Discover Unique Finds
-          </Heading>
+          <Heading as="h2">Discover Unique Finds</Heading>
           <Text>Explore a curated selection of exclusive products.</Text>
           <Button className="main-button" asChild>
             <a href="/products">Explore Now</a>

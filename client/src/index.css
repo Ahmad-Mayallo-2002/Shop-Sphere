@@ -11,6 +11,21 @@
   margin-right: auto;
 }
 
+.hero-section {
+  background-color: rgb(0, 0, 0, 0.65);
+  background-blend-mode: darken;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  background-image: url("./hero.jpg");
+}
+
+.hero-section h2 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 48px;
+}
+
 .main-button {
   transition-duration: 300ms;
   background-color: var(--mainColor);

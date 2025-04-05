@@ -14,6 +14,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import logo from "../assets/images/footer logo.png";
 
 export default function Footer() {
   return (
@@ -73,7 +74,7 @@ export default function Footer() {
           alignItems="center"
         >
           <HStack className="vendor-marketplace">
-            <Image src="./footer logo.png" alt="Footer Logo" />
+            <Image src={logo} alt="Footer Logo" />
             <Heading as="h3" color="#fff" fontWeight={700} fontSize="3xl">
               Vendor Marketplace
             </Heading>

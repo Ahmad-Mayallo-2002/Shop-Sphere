@@ -13,6 +13,8 @@ const SignUp = lazy(() => import("./pages/auth/SignUp"));
 const SendOTP = lazy(() => import("./pages/auth/SendOTP"));
 const WriteOTP = lazy(() => import("./pages/auth/WriteOTP"));
 const UpdatePassword = lazy(() => import("./pages/auth/UpdatePassword"));
+const Products = lazy(() => import("./pages/users/Products"));
+const Product = lazy(() => import("./pages/users/SingleProduct"));
 
 function LoadPage({ page }: { page: ReactNode }) {
   return <Suspense fallback={<Loading />}>{page}</Suspense>;
@@ -36,6 +38,11 @@ function App() {
           <Route
             path="/vendor-panel"
             element={<LoadPage page={<VendorPanel />} />}
+          />
+          <Route path="/products" element={<LoadPage page={<Products />} />} />
+          <Route
+            path="/products/:id"
+            element={<LoadPage page={<Product />} />}
           />
         </Routes>
         <Footer />

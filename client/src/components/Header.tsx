@@ -13,6 +13,7 @@ import { useContext, useRef, useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { UseLoggedContext } from "./contextApi/loggedContext";
 import Cookies from "universal-cookie";
+import logo from "../assets/images/logo.png";
 
 export default function Header() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -29,7 +30,7 @@ export default function Header() {
         justifyContent="space-between"
       >
         <HStack>
-          <Image src="./logo.png" alt="Logo Image" />
+          <Image src={logo} alt="Logo Image" />
           <Heading as="h1" fontSize="2xl">
             ShopSphere
           </Heading>
