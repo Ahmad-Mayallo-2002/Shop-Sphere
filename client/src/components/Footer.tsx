@@ -32,7 +32,7 @@ export default function Footer() {
             Subscribe to our newsletter
           </Heading>
           <form>
-            <HStack gap={0} mb={12} maxW="450px" w="450px">
+            <HStack gap={0} mb={12} maxW="450px">
               <InputGroup
                 startElement={
                   <Icon fontSize={24} color="#fff">

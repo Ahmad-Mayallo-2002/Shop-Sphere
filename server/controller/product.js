@@ -32,8 +32,15 @@ const addProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("vendorId", "name");
-    res.status(200).json(products);
+    const products = await Product.find()
+      .populate("vendorId", "username")
+      .limit(req.query.limit)
+      .skip(req.query.skip);
+    const requestBody = {};
+    if (req.headers.role === "vendor") requestBody.vendorId = req.headers.id;
+    const length = await Product.countDocuments(requestBody);
+
+    res.status(200).json({ products, length });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: serverError });
@@ -77,13 +84,24 @@ const deleteProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const file = req.file;
-    const requestBody = req.body;
+    const { name, description, price, discount, category, stock, brandName } =
+      req.body;
+    const requestBody = {};
+    if (name) requestBody.name = name;
+    if (description) requestBody.description = description;
+    if (price) requestBody.price = price;
+    if (discount) requestBody.discount = discount;
+    if (category) requestBody.category = category;
+    if (stock) requestBody.stock = stock;
+    if (brandName) requestBody.brandName = brandName;
+    if (!Object.keys(requestBody).length)
+      return res.status(404).json({ msg: "Enter at Least one Field" });
     let image;
     if (file) {
       image = writeFileToPublic(file);
       requestBody.image = image;
     }
-    await Product.findByIdAndUpdate(req.params.id, requestBody);
+    await Product.findByIdAndUpdate(req.params.id, { $set: requestBody });
     res.status(200).json({ msg: "Product is updated" });
   } catch (error) {
     console.log(error);

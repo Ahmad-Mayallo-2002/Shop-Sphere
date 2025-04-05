@@ -96,3 +96,29 @@ a {
   margin-bottom: 2rem;
   text-align: center;
 }
+
+.product-image-label {
+  display: block;
+  height: 250px;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+}
+
+.product-image-label span {
+  display: block;
+  background-color: var(--mainColor);
+  color: #fff;
+  padding: 10px 30px;
+  transition-duration: 300ms;
+}
+
+.product-image-label:hover span {
+  background-color: var(--mainColorHover);
+}
+
+.product-image-label:hover:active span {
+  background-color: var(--mainColorHoverActive);
+}

@@ -1,32 +1,30 @@
 const { faker } = require("@faker-js/faker");
+const { writeFileSync } = require("fs");
+const { Types } = require("mongoose");
 
-const users = [];
+function generateFakeProduct() {
+  return {
+    name: faker.commerce.productName(),
+    image: faker.image.urlLoremFlickr({
+      category: "product",
+      width: 500,
+      height: 500,
+    }), // or faker.image.imageUrl()
+    description: faker.commerce.productDescription(),
+    price: parseFloat(faker.commerce.price({ min: 10, max: 500 })),
+    discount: Number(
+      faker.number.float({ min: 0, max: 50, precision: 0.1 }).toFixed(2)
+    ),
+    category: faker.commerce.department(),
+    vendorId: new Types.ObjectId("67dab3b936083a70f5b9d777"),
+    stock: faker.number.int({ min: 0, max: 100 }),
+    brandName: faker.company.name(),
+  };
+}
 
-// Function to generate a valid email
-const generateEmail = () => {
-  const name = faker.person.firstName().toLowerCase();
-  const number = faker.number.int({ min: 1, max: 9999 });
-  return `${name}${number}@gmail.com`;
-};
+// Example: Generate 5 fake products
+const fakeProducts = Array.from({ length: 100 }, generateFakeProduct);
 
-// Function to generate 100 users
-const generateUsers = async () => {
-  for (let i = 0; i < 100; i++) {
-    const role = faker.helpers.arrayElement(["user", "vendor"]); // No "admin"
-    const user = {
-      username: faker.person.firstName(),
-      email: generateEmail(),
-      password: faker.internet.password(),
-      phone: faker.phone.number("+1-###-###-####"),
-      country: faker.location.country(),
-      role,
-    };
-    if (role === "vendor") {
-      user.shopName = faker.company.name();
-      user.shopDescription = faker.lorem.sentence();
-    }
-    users.push(user);
-  }
-};
-
-generateUsers();
+writeFileSync("./products.json", JSON.stringify(fakeProducts), {
+  encoding: "utf-8",
+});

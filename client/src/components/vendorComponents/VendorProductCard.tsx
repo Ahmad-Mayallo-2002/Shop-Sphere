@@ -1,5 +1,6 @@
 import { Product } from "@/assets/data/types";
 import { Button, Card, Image } from "@chakra-ui/react";
+import VendorUpdateProduct from "./vendorUpdateProduct";
 
 export default function VendorProductCard({
   name,
@@ -25,9 +26,13 @@ export default function VendorProductCard({
         <Description>Description {description}</Description>
       </Body>
       <Footer display="grid" pb={3} px={3}>
-        <Button colorPalette="blue" size="sm" w="full">
-          Edit Product
-        </Button>
+        <VendorUpdateProduct
+          button={
+            <Button colorPalette="blue" size="sm" w="full">
+              Edit Product
+            </Button>
+          }
+        />
         <Button colorPalette="red" size="sm" w="full">
           Delete Product
         </Button>
