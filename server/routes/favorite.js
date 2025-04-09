@@ -5,6 +5,7 @@ const { Product } = require("../models/product");
 const {
   addToFavorite,
   deleteFromFavorites,
+  getUserFavorites,
 } = require("../controller/favorite");
 
 const router = Router();
@@ -22,5 +23,7 @@ router.delete(
   findOneById(Product),
   deleteFromFavorites
 );
+
+router.get("/get-user-favorites", authorization, getUserFavorites);
 
 module.exports = router;

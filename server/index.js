@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const product = require("./routes/product");
 const favorite = require("./routes/favorite");
+const cart = require("./routes/cart");
 require("dotenv").config();
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(
 app.use(api, users);
 app.use(api, product);
 app.use(api, favorite);
+app.use(api, cart);
 
 (async () => {
   try {

@@ -18,6 +18,6 @@ const CartSchema = new Schema(
   { collection: "carts", timestamps: true }
 );
 
-const Cart = model("Cart", FavoriteSchema);
+const Cart = model("Cart", CartSchema);
 
 module.exports = { Cart };

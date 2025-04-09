@@ -15,6 +15,7 @@ const WriteOTP = lazy(() => import("./pages/auth/WriteOTP"));
 const UpdatePassword = lazy(() => import("./pages/auth/UpdatePassword"));
 const Products = lazy(() => import("./pages/users/Products"));
 const Product = lazy(() => import("./pages/users/SingleProduct"));
+const Profile = lazy(() => import("./pages/users/Profile"));
 
 function LoadPage({ page }: { page: ReactNode }) {
   return <Suspense fallback={<Loading />}>{page}</Suspense>;
@@ -44,6 +45,7 @@ function App() {
             path="/products/:id"
             element={<LoadPage page={<Product />} />}
           />
+          <Route path="/profile" element={<LoadPage page={<Profile />} />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,5 +1,7 @@
 import { mainEndPoint } from "@/assets/data/links";
 import { Product } from "@/assets/data/types";
+import { getToken } from "@/assets/utils/getToken";
+import { errorToaster, successToaster } from "@/assets/utils/toasters";
 import {
   Box,
   Button,
@@ -20,6 +22,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 export default function Products() {
+  const { token, _id } = getToken();
   const [products, setProducts] = useState<Product[]>([]);
   const [skip, setSkip] = useState<number>(0);
   const [length, setLength] = useState<number>(0);
@@ -40,7 +43,40 @@ export default function Products() {
     };
     getData();
   }, [skip]);
-
+  const handleAddToFavorites = async (id: string) => {
+    try {
+      const { data } = await axios.post(
+        mainEndPoint + `api/add-to-favorites/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            id: _id,
+          },
+        }
+      );
+      successToaster(data.msg);
+    } catch (error: any) {
+      errorToaster(error.response.data.msg);
+    }
+  };
+  const handleAddToCart = async (id: string) => {
+    try {
+      const { data } = await axios.post(
+        mainEndPoint + `api/add-to-cart/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            id: _id,
+          },
+        }
+      );
+      successToaster(data.msg);
+    } catch (error: any) {
+      errorToaster(error.response.data.msg);
+    }
+  };
   return (
     <>
       <Center className="hero-section" as="section">
@@ -97,13 +133,21 @@ export default function Products() {
                   </Body>
                   <Footer p={3}>
                     <ButtonGroup attached w="full">
-                      <Button flexGrow={1} colorPalette="red">
+                      <Button
+                        onClick={() => handleAddToFavorites(product._id)}
+                        flexGrow={1}
+                        colorPalette="red"
+                      >
                         <BiHeart />
                       </Button>
                       <Button asChild flexGrow={1} colorPalette="blue">
                         <a href={`/products/${product._id}`}>More</a>
                       </Button>
-                      <Button flexGrow={1} className="main-button">
+                      <Button
+                        onClick={() => handleAddToCart(product._id)}
+                        flexGrow={1}
+                        className="main-button"
+                      >
                         <FaCartShopping />
                       </Button>
                     </ButtonGroup>

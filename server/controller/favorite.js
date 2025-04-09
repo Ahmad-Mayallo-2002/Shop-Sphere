@@ -1,5 +1,17 @@
 const { Favorite } = require("../models/favorite");
-const { Product } = require("../models/product");
+
+const getUserFavorites = async (req, res) => {
+  try {
+    const userId = req.headers.id;
+    const favorite = await Favorite.findOne({ userId }).populate("products");
+    if (!favorite)
+      return res.status(404).json({ msg: "Not favorites are found" });
+    return res.status(200).json(favorite.products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
+};
 
 const addToFavorite = async (req, res) => {
   try {
@@ -12,6 +24,7 @@ const addToFavorite = async (req, res) => {
         userId,
         products: [productId],
       });
+      await newFavorite.save();
     } else {
       const currentIndex = favorite.products.findIndex(
         (product) => product._id.toString() === productId
@@ -21,8 +34,8 @@ const addToFavorite = async (req, res) => {
           .status(400)
           .json({ msg: "This Product is Already Exist in Favorites" });
       favorite.products.push(productId);
+      await favorite.save();
     }
-    await newFavorite.save();
     return res.status(201).json({ msg: "Done" });
   } catch (error) {
     console.log(error);
@@ -52,4 +65,5 @@ const deleteFromFavorites = async (req, res) => {
 module.exports = {
   addToFavorite,
   deleteFromFavorites,
+  getUserFavorites,
 };
