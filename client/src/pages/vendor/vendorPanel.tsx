@@ -9,13 +9,13 @@ export default function VendorPanel() {
     <>
       <Box as="section" my={16} className="charts-section">
         <Container>
-          <Heading className="vendor-heading">Overview Dashboard</Heading>
+          <Heading className="main-heading">Overview Dashboard</Heading>
           <VendorPanelCharts />
         </Container>
       </Box>
       <Box as="section" my={16} className="add-product-section">
         <Container>
-          <Heading className="vendor-heading">Add Product</Heading>
+          <Heading className="main-heading">Add Product</Heading>
           <ProductForm
             method="post"
             isRequired={true}
@@ -25,13 +25,13 @@ export default function VendorPanel() {
       </Box>
       <Box as="section" my={16} className="products-section">
         <Container>
-          <Heading className="vendor-heading">Products Listings</Heading>
+          <Heading className="main-heading">Products Listings</Heading>
           <VendorProducts />
         </Container>
       </Box>
       <Box as="section" my={16} className="orders-section">
         <Container>
-          <Heading className="vendor-heading">Orders Listings</Heading>
+          <Heading className="main-heading">Orders Listings</Heading>
           <VendorOrders />
         </Container>
       </Box>

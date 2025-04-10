@@ -9,9 +9,17 @@ const CartSchema = new Schema(
     },
     products: [
       {
-        type: Types.ObjectId,
-        ref: "Product",
-        required: true,
+        productId: {
+          type: Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          min: 1,
+          required: true,
+          default: 1,
+        },
       },
     ],
   },

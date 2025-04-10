@@ -3,7 +3,7 @@ const { Cart } = require("../models/cart");
 const getUserCart = async (req, res) => {
   try {
     const userCart = await Cart.findOne({ userId: req.headers.id }).populate(
-      "products"
+      "products.productId"
     );
     if (!userCart) return res.status(404).json({ msg: "Not Found Cart" });
     res.status(200).json(userCart.products);
@@ -39,12 +39,12 @@ const addToCart = async (req, res) => {
       );
       if (currentIndex !== -1)
         return res.status(400).json({ msg: "This product is already in cart" });
-      userCart.products.push(productId);
+      userCart.products.push({ productId, quantity: req.body.quantity });
       await userCart.save();
     } else {
       const newCart = new Cart({
         userId: req.headers.id,
-        products: [productId],
+        products: [{ productId, quantity: req.body.quantity }],
       });
       await newCart.save();
     }
@@ -63,7 +63,7 @@ const deleteFromCart = async (req, res) => {
     });
     if (!userCart) return res.status(404).json({ msg: "Not Found Cart" });
     const currentIndex = userCart.products.findIndex(
-      (product) => product._id.toString() === productId
+      (product) => product.productId._id.toString() === productId
     );
     if (currentIndex === -1)
       return res.status(404).json({ msg: "This product is not found in cart" });

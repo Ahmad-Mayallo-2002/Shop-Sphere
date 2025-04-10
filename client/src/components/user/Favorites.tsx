@@ -14,11 +14,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-type Token = {
-  _id: string;
-  token: string;
-};
+import { Token } from "../../pages/users/Profile";
 
 export default function Favorites({ token, _id }: Token) {
   const [favorites, setFavorites] = useState<Product[]>([]);
@@ -45,7 +41,7 @@ export default function Favorites({ token, _id }: Token) {
   const handleDeleteCart = async (id: string) => {
     try {
       const { data } = await axios.delete(
-        mainEndPoint + `api/delete-from-cart/${id}`,
+        mainEndPoint + `api/delete-from-favorites/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -62,16 +58,16 @@ export default function Favorites({ token, _id }: Token) {
   return (
     <Box as="section" my={24} className="favorites">
       <Container>
-        <Heading className="vendor-heading">My Favorites</Heading>
+        <Heading className="main-heading">My Favorites</Heading>
         {!favorites.length ? (
-          <Center h="200px" fontWeight={700} fontSize="4xl">
+          <Center h="200px" fontWeight={700} fontSize="2xl">
             No Favorites Here
           </Center>
         ) : (
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={4}>
             {favorites.map((favorite) => (
               <Root key={favorite._id}>
-                <Header>
+                <Header p={3}>
                   <Image
                     src={
                       /^https/.test(favorite.image)
@@ -82,14 +78,14 @@ export default function Favorites({ token, _id }: Token) {
                     w="full"
                   />
                 </Header>
-                <Body>
+                <Body p={3} pt={0}>
                   <Title>{favorite.name}</Title>
                   <Description>Price: {favorite.price}</Description>
                   {favorite.discount && (
                     <Description>Discount: {favorite.discount}</Description>
                   )}
                 </Body>
-                <Footer>
+                <Footer p={3} pt={0}>
                   <ButtonGroup w="full" attached>
                     <Button
                       onClick={() => handleDeleteCart(favorite._id)}

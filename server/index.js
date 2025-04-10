@@ -8,6 +8,7 @@ const session = require("express-session");
 const product = require("./routes/product");
 const favorite = require("./routes/favorite");
 const cart = require("./routes/cart");
+const order = require("./routes/order");
 require("dotenv").config();
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(api, users);
 app.use(api, product);
 app.use(api, favorite);
 app.use(api, cart);
+app.use(api, order);
 
 (async () => {
   try {

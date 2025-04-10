@@ -26,6 +26,7 @@ type User = {
   shopName?: string;
   shopDescription?: string;
   phone: string;
+  country: string;
 };
 
 const items = [
@@ -114,6 +115,19 @@ export default function SignUp() {
             placeholder={"Write Password"}
             validateObject={{
               required: "Phone Number is Required",
+            }}
+          />
+
+          {/* Country */}
+          <TextInputField
+            label={"Country"}
+            name={"country"}
+            type={"text"}
+            register={register}
+            errors={errors}
+            placeholder={"Write Your Country"}
+            validateObject={{
+              required: "Country is Required",
             }}
           />
 
