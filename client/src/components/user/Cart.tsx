@@ -30,6 +30,10 @@ export type Order = {
   address: string;
   payment: string;
   totalPrice: number;
+  userId: {
+    email: string;
+    username: string;
+  };
 };
 
 export default function Cart({ _id, token }: Token) {

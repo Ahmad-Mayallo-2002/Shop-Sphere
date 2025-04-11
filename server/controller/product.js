@@ -32,7 +32,7 @@ const addProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find()
+    const products = await Product.find({ vendorId: req.headers.id })
       .populate("vendorId", "username")
       .limit(req.query.limit)
       .skip(req.query.skip);

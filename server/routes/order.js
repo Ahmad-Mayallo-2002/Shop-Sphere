@@ -13,13 +13,7 @@ const {
 
 const router = Router();
 
-router.get(
-  "/get-all-orders",
-  authorization,
-  checkAdmin,
-  findAll(Order),
-  getAllOrders
-);
+router.get("/get-all-orders", authorization, findAll(Order), getAllOrders);
 
 router.get(
   "/get-all-orders/:id",
@@ -31,7 +25,7 @@ router.get(
 router.get("/get-user-orders", authorization, getUserOrders);
 
 router.delete(
-  "/delete-user/:id",
+  "/delete-order/:id",
   authorization,
   findOneById(Order),
   deleteOrder
